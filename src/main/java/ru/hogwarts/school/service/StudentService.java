@@ -49,5 +49,13 @@ public class StudentService {
         studentRepository.delete(existingStudent);
         return existingStudent;
     }
+
+    public Collection<Student> getByAgeBetween(int min, int max) {
+        return studentRepository.findAllByAgeBetween(min, max);
+    }
+
+    public Collection<Student> getByFacultyId(Long facultyId) {
+        return studentRepository.findAllByFaculty_Id(facultyId);
+    }
 }
 
