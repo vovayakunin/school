@@ -3,54 +3,51 @@ package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exception.DataNotFoundException;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class StudentService {
 
-    private final Map<Long, Student> map = new HashMap<>();
-    private Long COUNTER = 1L;
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
 
     public Student getById(Long id) {
-        return map.get(id);
+        return studentRepository.findById(id).orElseThrow(DataNotFoundException::new);
     }
 
     public Collection<Student> getALl() {
-        return map.values();
+        return studentRepository.findAll();
     }
 
 
     public Collection<Student> getByAge(int age) {
-        return map.values().stream()
-                .filter(s -> s.getAge() == age)
-                .collect(Collectors.toList());
+        return studentRepository.findAllByAge(age);
     }
 
 
     public Student create(Student student) {
-        Long nextID = COUNTER++;
-        student.setId(nextID);
-        map.put(student.getId(), student);
-        return student;
+        return studentRepository.save(student);
     }
 
     public Student update(Long id, Student student) {
-        if (!map.containsKey(id)) {
-            throw new DataNotFoundException();
-        }
-        Student exsitingStudent = map.get(id);
-        exsitingStudent.setName(student.getName());
-        exsitingStudent.setAge(student.getAge());
-        return exsitingStudent;
+
+        Student exsitingStudent = studentRepository.findById(id).orElseThrow(DataNotFoundException::new);
+        Optional.ofNullable(student.getName()).ifPresent(exsitingStudent::setName);
+        Optional.ofNullable(student.getAge()).ifPresent(exsitingStudent::setAge);
+        return studentRepository.save(exsitingStudent);
     }
 
-    public void delete(Long id) {
-        if (map.remove(id) == null) {
-            throw new DataNotFoundException();
-        }
+    public Student delete(Long id) {
+        Student existingStudent = studentRepository.findById(id).orElseThrow(DataNotFoundException::new);
+        studentRepository.delete(existingStudent);
+        return existingStudent;
     }
 }
+
