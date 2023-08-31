@@ -1,4 +1,4 @@
-package ru.hogwarts.school.service;
+package ru.hogwarts.school.controllerWMT;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exception.DataNotFoundException;
