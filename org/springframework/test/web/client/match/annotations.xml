@@ -1,0 +1,12 @@
+<root>
+    <item name='org.springframework.test.web.client.match.JsonPathRequestMatchers org.springframework.test.web.client.RequestMatcher value(java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+    <item name='org.springframework.test.web.client.match.MockRestRequestMatchers org.springframework.test.web.client.match.JsonPathRequestMatchers jsonPath(java.lang.String, java.lang.Object...)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;_,_-&gt;new&quot;"/>
+        </annotation>
+    </item>
+</root>
