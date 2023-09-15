@@ -5,12 +5,14 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
 public class StudentController {
 
     private final StudentService studentService;
+    private StudentController service;
 
 
     public StudentController(StudentService studentService) {
@@ -55,6 +57,21 @@ public class StudentController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         studentService.delete(id);
+    }
+
+    @GetMapping("/count)")
+    public long count() {
+        return service.count();
+    }
+
+    @GetMapping("/average")
+    public double average() {
+        return service.average();
+    }
+
+    @GetMapping("/last-five")
+    public List<Student> getLastFive() {
+        return service.studentService.getLastStudents(5);
     }
 }
 
