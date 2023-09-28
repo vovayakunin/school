@@ -1,15 +1,17 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
 import java.util.List;
 
+@Service
 @RestController
 @RequestMapping("/student")
 public class StudentController {
+
 
     private final StudentService studentService;
     private StudentController service;
@@ -73,5 +75,17 @@ public class StudentController {
     public List<Student> getLastFive() {
         return service.studentService.getLastStudents(5);
     }
+
+
+    @GetMapping("threads/async")
+    public void printAsync() {
+        service.printAsync();
+    }
+
+    @GetMapping("threads/sync")
+    public void printSync() {
+        service.printSync();
+    }
+
 }
 
