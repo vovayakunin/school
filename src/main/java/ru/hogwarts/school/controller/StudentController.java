@@ -87,5 +87,16 @@ public class StudentController {
         service.printSync();
     }
 
+    @GetMapping("/stream/starts-with-a")
+    public List<String> startsWithA() {
+        return service.getAllStartsWithA();
+    }
+
+    @GetMapping("/stream/average-age")
+    public double getAverageAge() {
+        return service.getAverageAge();
+    }
+
 }
+
 
