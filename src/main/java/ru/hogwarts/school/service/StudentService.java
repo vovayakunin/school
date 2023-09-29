@@ -133,7 +133,9 @@ public class StudentService {
     }
 
     private synchronized void printSync(Student student) {
-        System.out.println(student);
+        for (int i = 1; i < 5; i++) {
+            System.out.println("count = " + student);
+        }
     }
 
     public List<String> getAllStartsWithA() {
