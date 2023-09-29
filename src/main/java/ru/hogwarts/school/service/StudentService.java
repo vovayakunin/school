@@ -90,6 +90,15 @@ public class StudentService {
         return studentRepository.findLastStudents(quantity);
     }
 
+    int count = 0;
+
+    public void start() {
+        for (int i = 1; i < 5; i++) {
+            System.out.println("count = " + count);
+            count++;
+        }
+    }
+
 
     public void printAsync() {
         List<Student> all = studentRepository.findAll();
